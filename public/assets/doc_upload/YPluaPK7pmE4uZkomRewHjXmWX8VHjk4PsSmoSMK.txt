@@ -1,0 +1,12 @@
+SELECT i_individu.NAMA_PEMOHON,i_individu.ALAMATRUMAH,i_syarikat.NAMA_SYARIKAT,i_syarikat.ALAMATSYARIKAT,i_kod_lepe.PENERANGAN,i_bayaran.SESI,i_bayaran.STATUS_BYR,i_bayaran.STATUS
+FROM `i_piklan` 
+
+JOIN i_permohonan ON i_permohonan.NO_FAIL = i_piklan.KOD_FAIL
+JOIN i_syarikat ON i_syarikat.ID_PENGGUNA = i_permohonan.ID_PENGGUNA
+JOIN i_individu ON i_individu.IDENTITYPASS = i_syarikat.II_IDENTITYPASS
+
+
+JOIN i_kod_lepe ON i_kod_lepe.KOD_LESEN = i_piklan.KOD_BAYARAN
+JOIN i_bayaran ON i_bayaran.KOD_BAYARAN = i_piklan.KOD_BAYARAN
+
+WHERE i_syarikat.ALAMATSYARIKAT LIKE "%jalan pasar baru%" AND i_bayaran.SESI LIKE "%2022%"
