@@ -48,7 +48,7 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users,email',
             'no_tel' => 'required|digits_between:10,11',
             'jantina' => 'required',
-            'no_kp' => 'required|integer|digits_between:11,12|unique:users,no_kp',
+            'no_kp' => 'required|digits_between:11,12|unique:users,no_kp',
             'jabatan_id' => 'required',
             'jawatan_id'  => 'required',
             'peranan' => 'required',
