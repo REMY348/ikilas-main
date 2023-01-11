@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AduanController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\JawatanController;
 use App\Http\Controllers\JenisAduanController;
@@ -126,6 +127,19 @@ Route::prefix('permohonan')->group(function () {
         Route::post('laman web/update/{id}', [LamanWebController::class,'updatePermohonanLamanWeb'])->name('update.permohonan.lamanweb');
     // permohonan laman web route end
 });
+
+
+Route::prefix('permohonan')->group(function () {
+    // permohonan laman web route begin
+        Route::get('aduan/all', [AduanController::class,'allAduanLamanWeb'])->name('all.aduan.lamanweb');
+        Route::get('aduan/add', [AduanController::class,'addAduanLamanWeb'])->name('add.aduan.lamanweb');
+        Route::get('aduan/view/{id}', [AduanController::class,'AduanLamanWebView'])->name('aduan.lamanweb.view');
+        Route::post('aduan/create', [AduanController::class,'createAduanLamanWeb'])->name('create.aduan.lamanweb');
+        Route::get('aduan/edit/{id}', [AduanController::class,'editAduanLamanWeb'])->name('edit.aduan.lamanweb');
+        Route::post('aduan/update/{id}', [AduanController::class,'updateAduanLamanWeb'])->name('update.aduan.lamanweb');
+    // permohonan laman web route end
+});
+
 
 Route::prefix('sokongan')->group(function () {
     // sokongan laman web route begin

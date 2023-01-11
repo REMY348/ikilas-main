@@ -28,7 +28,7 @@
                 <td>{{ $lulus->status }}</td>
                 <td>{{ $lulus->tarikh_mula }} - {{ $lulus->tarikh_tamat }}</td>
                 <td class="text-center">
-                    <a href="{{ route('edit.kelulusan.lamanweb',$lulus->id) }}"><span class="btn btn-info fa fa-edit {{ ($lulus->status != 'disokong') ? 'disabled' : '' }}" title="Ubah"></span></a>
+                    <a href="{{ route('edit.kelulusan.lamanweb',$lulus->id) }}"><span class="btn btn-info fa fa-edit" {{ ($lulus->status != 'disokong') ? 'hidden' : '' }} title="Ubah"></span></a>
                     <a href="{{ route('permohonan.lamanweb.view',$lulus->id) }}"><span class="btn btn-warning fa fa-solid fa-eye" title="paparan penuh"></span></a>
                 </td>
             </tr>
