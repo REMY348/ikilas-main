@@ -129,14 +129,14 @@ Route::prefix('permohonan')->group(function () {
 });
 
 
-Route::prefix('permohonan')->group(function () {
+Route::prefix('permohonan2')->group(function () {
     // permohonan laman web route begin
-        Route::get('aduan/all', [AduanController::class,'allAduanLamanWeb'])->name('all.aduan.lamanweb');
-        Route::get('aduan/add', [AduanController::class,'addAduanLamanWeb'])->name('add.aduan.lamanweb');
-        Route::get('aduan/view/{id}', [AduanController::class,'AduanLamanWebView'])->name('aduan.lamanweb.view');
-        Route::post('aduan/create', [AduanController::class,'createAduanLamanWeb'])->name('create.aduan.lamanweb');
-        Route::get('aduan/edit/{id}', [AduanController::class,'editAduanLamanWeb'])->name('edit.aduan.lamanweb');
-        Route::post('aduan/update/{id}', [AduanController::class,'updateAduanLamanWeb'])->name('update.aduan.lamanweb');
+        Route::get('aduan/all', [AduanController::class,'allAduanLamanWeb'])->name('all.permohonan.aduan');
+        Route::get('aduan/add', [AduanController::class,'addAduanLamanWeb'])->name('add.permohonan.aduan');
+        Route::get('aduan/view/{id}', [AduanController::class,'AduanLamanWebView'])->name('permohonan.aduan.view');
+        Route::post('aduan/create', [AduanController::class,'createAduanLamanWeb'])->name('create.permohonan.lamanweb');
+        Route::get('aduan/edit/{id}', [AduanController::class,'editAduanLamanWeb'])->name('edit.permohonan.lamanweb');
+        Route::post('aduan/update/{id}', [AduanController::class,'updateAduanLamanWeb'])->name('update.aduan');
     // permohonan laman web route end
 });
 

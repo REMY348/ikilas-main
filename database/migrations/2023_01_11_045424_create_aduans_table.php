@@ -21,6 +21,15 @@ return new class extends Migration
             $table->integer('jenis_aduan_id');
             $table->text('keterangan');
             $table->string('uploaded_image')->nullable();
+            $table->text('ulasan')->nullable();
+            $table->string('url')->nullable();
+            $table->string('status');
+            $table->string('mohon_by')->nullable();
+            $table->string('tindakan_by')->nullable();
+            $table->string('sesi')->nullable();
+            $table->date('tarikh_mohon')->nullable();
+            $table->date('tarikh_lulus')->nullable();
+            $table->string('lulus_by')->nullable();
 
             $table->timestamps();
         });

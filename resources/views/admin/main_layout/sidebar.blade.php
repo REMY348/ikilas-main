@@ -149,7 +149,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('all.permohonan.aduan') }}" class="nav-link {{ ($prefix == 'permohonan2') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p><small>Aduan</small></p>
               </a>
