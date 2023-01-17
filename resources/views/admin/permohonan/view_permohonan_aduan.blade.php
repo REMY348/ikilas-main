@@ -90,47 +90,14 @@
       {{-- END PERMOHONAN --}}
 
       {{-- BEGIN SOKONGAN --}}
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header bg-dark">
-          <th><b> Sokongan Laman Web </b></th>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>Perkara</th>
-                <th>Keterangan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="width: 30%"><b>Ulasan Pegawai / Pengarah</b></td>
-                <td>{{ ($lamanweb->ulasan != null) ? $lamanweb->ulasan : ' - Data Tidak Wujud - ' }}</td>
-              </tr>
-              <tr>
-                <td><b>Sokongan Dibuat Oleh</b></td>
-                <td>{{ ($lamanweb->sokong_by != null) ? $lamanweb->sokong_by : ' - Data Tidak Wujud - ' }}</td>
-              </tr>
-              <tr>
-                <td><b>Tarikh Disokong</b></td>
-                <td>{{ ($lamanweb->tarikh_disokong != null) ? $lamanweb->tarikh_disokong : ' - Data Tidak Wujud - ' }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-    </div>
+    
     {{-- END SOKONGAN --}}
 
     {{-- BEGIN KELULUSAN --}}
     <div class="col-12">
       <div class="card">
         <div class="card-header bg-dark">
-          <th><b> Kelulusan Laman Web </b></th>
+          <th><b> Kelulusan Aduan </b></th>
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">

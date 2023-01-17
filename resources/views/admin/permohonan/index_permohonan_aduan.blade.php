@@ -34,7 +34,7 @@
                 <td>{{ $mohon->status }}</td>
                 <td>{{ $mohon->tarikh_mohon }}</td>
                 <td class="text-center">
-                    <a href="{{ route('edit.permohonan.lamanweb',$mohon->id) }}"><span class="btn btn-info fa fa-edit" {{ ($mohon->status != 'baru_r') ? 'hidden' : '' }} title="Ubah"></span></a>
+                    <a href="{{ route('edit.permohonan.aduan',$mohon->id) }}"><span class="btn btn-info fa fa-edit" {{ ($mohon->status != 'baru_r') ? 'hidden' : '' }} title="Ubah"></span></a>
                     <a href="{{ route('permohonan.aduan.view',$mohon->id) }}"><span class="btn btn-warning fa fa-solid fa-eye" title="paparan penuh"></span></a>
                 </td>
             </tr>

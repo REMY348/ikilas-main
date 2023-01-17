@@ -108,6 +108,13 @@ class AduanController extends Controller
 
     }
 
+    public function editPermohonanAduan($id){
+        $data['katmaklumat'] = KategoriMaklumat::all();
+        $data['katsaluran'] = KategoriSaluran::all();
+        $data['jenkemaskini'] = JenisPengemaskinian::all();
+        $data['mohon'] = LamanWeb::find($id);
 
+        return view('admin.permohonan.edit_permohonan_aduan',$data);
+    }
 
 }
