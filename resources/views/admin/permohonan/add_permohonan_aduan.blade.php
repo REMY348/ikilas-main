@@ -5,7 +5,7 @@
 <section class="content">
   <div class="container-fluid">
     
-<form action="" method="post" enctype="multipart/form-data">
+<form action="{{ route('create.permohonan.aduan') }}" method="post" enctype="multipart/form-data">
   @csrf
     <!-- SELECT2 EXAMPLE -->
     <div class="card card-default">
@@ -91,15 +91,15 @@
             
             <div class="form-group">
                 <label for="exampleInputRounded0">Jenis Aduan</label>
-                <select name="jenis_kemaskini_id"  class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
+                <select name="jenis_aduan_id"  class="form-control select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
                   <option selected disabled>Sila Pilih</option>
                   @foreach ($jenAduan as $jenis)
                   
-                      <option value="{{ $jenis->id }}" {{ (old('jenis_kemaskini_id') == $jenis->id) ? 'selected' : '' }}>{{ $jenis->name }}</option>
+                      <option value="{{ $jenis->id }}" {{ (old('jenis_aduan_id') == $jenis->id) ? 'selected' : '' }}>{{ $jenis->name }}</option>
   
                   @endforeach
                 </select>
-                  @error('jenis_kemaskini_id')
+                  @error('jenis_aduan_id')
                   <span class="text-danger">{{ $message }}</span>
                   @enderror
               </div>

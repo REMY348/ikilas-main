@@ -1,6 +1,6 @@
 @extends('admin.main_layout.layout')
 @section('main.content')
-{{-- {{ dd($mohon_lamanweb[0]->status) }} --}}
+{{-- {{ dd($mohon_aduan) }} --}}
 
 
 
@@ -17,23 +17,25 @@
             <table id="example3" class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
-                <th>Tajuk</th>
+                <th>No Rujukan</th>
+                <th>Nama Pemohon</th>
                 <th>Keterangan</th>
                 <th>Status</th>
-                <th>Tarikh Mula - Tamat</th>
+                <th>Tarikh Mohon</th>
                 <th>Tindakan</th>
             </tr>
             </thead>
             <tbody>
-                @foreach ($mohon_lamanweb as $key=>$mohon)
+                @foreach ($mohon_aduan as $key=>$mohon)
             <tr>
-                <td>{{ $mohon->tajuk }}</td>
+                <td>{{ $mohon->no_rujukan }}</td>
+                <td>{{ $mohon->name }}</td>
                 <td>{{ $mohon->keterangan }}</td>
                 <td>{{ $mohon->status }}</td>
-                <td>{{ $mohon->tarikh_mula }} - {{ $mohon->tarikh_tamat }}</td>
+                <td>{{ $mohon->tarikh_mohon }}</td>
                 <td class="text-center">
                     <a href="{{ route('edit.permohonan.lamanweb',$mohon->id) }}"><span class="btn btn-info fa fa-edit" {{ ($mohon->status != 'baru_r') ? 'hidden' : '' }} title="Ubah"></span></a>
-                    <a href="{{ route('permohonan.lamanweb.view',$mohon->id) }}"><span class="btn btn-warning fa fa-solid fa-eye" title="paparan penuh"></span></a>
+                    <a href="{{ route('permohonan.aduan.view',$mohon->id) }}"><span class="btn btn-warning fa fa-solid fa-eye" title="paparan penuh"></span></a>
                 </td>
             </tr>
             @endforeach
@@ -41,10 +43,11 @@
             </tbody>
             <tfoot>
             <tr>
-                <th>Tajuk</th>
+                <th>No Rujukan</th>
+                <th>Nama Pemohon</th>
                 <th>Keterangan</th>
                 <th>Status</th>
-                <th>Tarikh Mula - Tamat</th>
+                <th>Tarikh Mohon</th>
                 <th>Tindakan</th>
             </tr>
             </tfoot>

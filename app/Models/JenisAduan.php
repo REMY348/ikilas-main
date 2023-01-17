@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class JenisAduan extends Model
 {
     use HasFactory;
+
+    public function aduan()
+    {
+        return $this->hasMany(Aduan::class,'jenis_aduan_id','id');
+    }
 }
