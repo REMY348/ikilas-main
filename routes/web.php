@@ -136,7 +136,7 @@ Route::prefix('permohonan2')->group(function () {
         Route::get('aduan/view/{id}', [AduanController::class,'PermohonanAduanView'])->name('permohonan.aduan.view');
         Route::post('aduan/create', [AduanController::class,'createPermohonanAduan'])->name('create.permohonan.aduan');
         Route::get('aduan/edit/{id}', [AduanController::class,'editPermohonanAduan'])->name('edit.permohonan.aduan');
-        Route::post('aduan/update/{id}', [AduanController::class,'updatePermohonanAduan'])->name('update.aduan');
+        Route::post('aduan/update/{id}', [AduanController::class,'updatePermohonanAduan'])->name('update.permohonan.aduan');
     // permohonan laman web route end
 });
 

@@ -13,6 +13,8 @@ use App\Models\KategoriMaklumat;
 use Illuminate\Support\Facades\DB;
 use App\Models\JenisPengemaskinian;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
 
 class AduanController extends Controller
 {
@@ -109,12 +111,100 @@ class AduanController extends Controller
     }
 
     public function editPermohonanAduan($id){
+
+
+        $data['jenaduan'] = JenisAduan::all();
         $data['katmaklumat'] = KategoriMaklumat::all();
         $data['katsaluran'] = KategoriSaluran::all();
         $data['jenkemaskini'] = JenisPengemaskinian::all();
-        $data['mohon'] = LamanWeb::find($id);
+        $data['mohon'] = Aduan::find($id);
 
         return view('admin.permohonan.edit_permohonan_aduan',$data);
     }
+
+    public function updatePermohonanAduan(Request $request,$id)
+    {
+        
+        if ($request->uploaded_image) {
+            # code...
+            
+            // $multiselect = $request->kategori_saluran_id;
+            // $saluran = implode(',',$multiselect);
+
+        $multimage = $request->uploaded_image;
+        $countimage = count($multimage);
+
+        $web = Aduan::find($id);
+        $web_image = explode(',',$web->uploaded_image);
+
+        foreach ($web_image as $images) {
+            # code...
+            File::delete($images);
+        }
+        
+        for ($i=0; $i < $countimage; $i++) { 
+            # code...
+            
+            $direction = 'assets/doc_upload/';
+            $imageName[] = $multimage[$i]->hashName();
+            $name = $multimage[$i]->hashName();
+            $fullName[] = $direction.$imageName[$i];
+            $multimage[$i]->move($direction,$name);
+            
+        }
+
+        // dd($web_image);
+        DB::table('aduans')->update([
+
+            'user_id'=>Auth::user()->id,
+            'jabatan_id'=>Auth::user()->jabatan->id,
+            'no_rujukan'=>$request->no_rujukan,
+            'jenis_aduan_id'=>$request->jenis_aduan_id,
+            'keterangan'=>$request->keterangan,
+            'uploaded_image'=>implode(',',$fullName),
+            'status'=>'baru',
+            'mohon_by'=>Auth::user()->name,
+            'sesi'=>Carbon::now()->format('Y'),
+            'tarikh_mohon'=>Carbon::now(),
+
+        ]);
+     
+        }else {
+            # code...
+
+
+        $web = Aduan::find($id);
+        $web_image = explode(',',$web->uploaded_image);
+
+        DB::table('aduans')->update([
+
+            'user_id'=>Auth::user()->id,
+            'jabatan_id'=>Auth::user()->jabatan->id,
+            'no_rujukan'=>$request->no_rujukan,
+            'jenis_aduan_id'=>$request->jenis_aduan_id,
+            'keterangan'=>$request->keterangan,
+            'status'=>'baru',
+            'mohon_by'=>Auth::user()->name,
+            'sesi'=>Carbon::now()->format('Y'),
+            'tarikh_mohon'=>Carbon::now(),
+
+        ]);
+
+        }
+
+        // $user_id = Auth::user()->id;
+        // $user = User::find($user_id);
+        // $user->unreadNotifications()->update(['read_at' => now()]);
+
+        // $user = User::where('jabatan_id',Auth::user()->jabatan_id)->where('role','pegawai jabatan')->get();
+        // $id_lamanweb = $lamanweb->id;
+        // dd($user);
+
+        // Notification::send($user,new LamanwebNotification($request->tajuk,$id_lamanweb));
+
+        return redirect()->route('all.permohonan.aduan')->with('success','Data Aduan Anda Telah Berjaya Dikemaskini');
+
+}
+
 
 }
