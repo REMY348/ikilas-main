@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('jabatan_id')->nullable();
             $table->string('no_rujukan')->nullable();
+            $table->string('tajuk');
             $table->integer('jenis_aduan_id');
             $table->text('keterangan');
             $table->string('uploaded_image')->nullable();

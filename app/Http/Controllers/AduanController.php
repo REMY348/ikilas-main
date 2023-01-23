@@ -8,12 +8,11 @@ use App\Models\LamanWeb;
 use App\Models\JenisAduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use App\Models\KategoriSaluran;
-use App\Models\KategoriMaklumat;
 use Illuminate\Support\Facades\DB;
-use App\Models\JenisPengemaskinian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Notifications\AduanNotification;
+use Illuminate\Support\Facades\Notification;
 
 
 class AduanController extends Controller
@@ -36,6 +35,7 @@ class AduanController extends Controller
         ->get()
         ;
 
+        
         return view('admin.permohonan.index_permohonan_aduan',$data);
     }
 
@@ -43,33 +43,30 @@ class AduanController extends Controller
     {
        
         $data['jenAduan'] = JenisAduan::all();
-        $data['katmaklumat'] = KategoriMaklumat::all();
-        $data['katsaluran'] = KategoriSaluran::all();
-        $data['jenkemaskini'] = JenisPengemaskinian::all();
+        
 
         return view('admin.permohonan.add_permohonan_aduan',$data,);
     }
 
     public function createPermohonanAduan(Request $request){
         $validatedData = $request->validate([
-
-            'no_rujukan' => 'required',
+            'tajuk' => 'required|max:255', 
             'jenis_aduan_id' => 'required',
-            'uploaded_image' => 'required|max:255',
+            'uploaded_image' => 'required|max:8000',
             'keterangan' => 'required|max:255',
 
-            // 'tajuk' => 'required|max:255', 
-            // 'kategori_saluran_id' => 'required',
-            // 'kategori_maklumat_id' => 'required',
-            // 'jenis_kemaskini_id' => 'required',
-            // 'tarikh_mula' => 'required',
-            // 'tarikh_tamat' => 'required',
-            // 'uploaded_image' => 'required|max:255',
-            // 'keterangan' => 'required|max:255',
+           
         ]);
         
+        $rujuk_initial = 'MPK/A19/'.Carbon::now()->format('d'.'/'.'m'.'/'.'Y'.'/');
+        $run_num = 0;
+        $mohon_tahun = Aduan::where('sesi', 'like' ,Carbon::now()->format('Y'))->get();
+        $kira = count($mohon_tahun);
+
         $multimage = $request->uploaded_image;
         $countimage = count($multimage);
+
+        
 
         for ($i=0; $i < $countimage; $i++) { 
             # code...
@@ -81,13 +78,32 @@ class AduanController extends Controller
             $multimage[$i]->move($direction,$name);
             
         }
+        
+        if ($kira <= 8) {
+            # code...
+            $num = '00'.$kira + 1;
+            $full_no = $rujuk_initial.$num;
+            $no_rujukan = $full_no;
+            
+        }elseif ($kira >= 10 && $kira<=98) {
+            # code...
+            $num = '0'.$kira + 1;
+            $full_no = $rujuk_initial.$num;
+            $no_rujukan = $full_no;
 
+        }else {
+            # code...
+            $num = $kira + 1;
+            $full_no = $rujuk_initial.$num;
+            $no_rujukan = $full_no;
+        }
 
         DB::table('aduans')->insert([
 
             'user_id'=>Auth::user()->id,
             'jabatan_id'=>Auth::user()->jabatan->id,
-            'no_rujukan'=>$request->no_rujukan,
+            'tajuk'=>$request->tajuk,
+            'no_rujukan'=>$no_rujukan,
             'jenis_aduan_id'=>$request->jenis_aduan_id,
             'keterangan'=>$request->keterangan,
             'uploaded_image'=>implode(',',$fullName),
@@ -96,6 +112,7 @@ class AduanController extends Controller
             'sesi'=>Carbon::now()->format('Y'),
             'tarikh_mohon'=>Carbon::now(),
 
+            
         ]);
         return redirect()->route('all.permohonan.aduan')->with('success','Data Aduan Anda Telah Berjaya Dimasukkan');
 
@@ -114,9 +131,7 @@ class AduanController extends Controller
 
 
         $data['jenaduan'] = JenisAduan::all();
-        $data['katmaklumat'] = KategoriMaklumat::all();
-        $data['katsaluran'] = KategoriSaluran::all();
-        $data['jenkemaskini'] = JenisPengemaskinian::all();
+       
         $data['mohon'] = Aduan::find($id);
 
         return view('admin.permohonan.edit_permohonan_aduan',$data);
@@ -124,12 +139,11 @@ class AduanController extends Controller
 
     public function updatePermohonanAduan(Request $request,$id)
     {
-        
+       
         if ($request->uploaded_image) {
             # code...
             
-            // $multiselect = $request->kategori_saluran_id;
-            // $saluran = implode(',',$multiselect);
+         
 
         $multimage = $request->uploaded_image;
         $countimage = count($multimage);
@@ -154,10 +168,12 @@ class AduanController extends Controller
         }
 
         // dd($web_image);
-        DB::table('aduans')->update([
+        
+        $data= Aduan::find($id)->update([
 
             'user_id'=>Auth::user()->id,
             'jabatan_id'=>Auth::user()->jabatan->id,
+            'tajuk'=>$request->tajuk,
             'no_rujukan'=>$request->no_rujukan,
             'jenis_aduan_id'=>$request->jenis_aduan_id,
             'keterangan'=>$request->keterangan,
@@ -180,6 +196,7 @@ class AduanController extends Controller
 
             'user_id'=>Auth::user()->id,
             'jabatan_id'=>Auth::user()->jabatan->id,
+            'tajuk'=>$request->tajuk,
             'no_rujukan'=>$request->no_rujukan,
             'jenis_aduan_id'=>$request->jenis_aduan_id,
             'keterangan'=>$request->keterangan,
@@ -192,15 +209,16 @@ class AduanController extends Controller
 
         }
 
-        // $user_id = Auth::user()->id;
-        // $user = User::find($user_id);
-        // $user->unreadNotifications()->update(['read_at' => now()]);
+        $user_id = Auth::user()->id;
+        $user2 = User::find($user_id);
+        $user2->unreadNotifications()->update(['read_at' => now()]);
 
-        // $user = User::where('jabatan_id',Auth::user()->jabatan_id)->where('role','pegawai jabatan')->get();
-        // $id_lamanweb = $lamanweb->id;
+
+        $user2 = User::where('jabatan_id',Auth::user()->jabatan_id)->where('role','pegawai jabatan')->get();
+        $id_aduan = Aduan::find($id);
         // dd($user);
 
-        // Notification::send($user,new LamanwebNotification($request->tajuk,$id_lamanweb));
+        Notification::send($user2,new AduanNotification($request->tajuk,$id_aduan));
 
         return redirect()->route('all.permohonan.aduan')->with('success','Data Aduan Anda Telah Berjaya Dikemaskini');
 

@@ -209,7 +209,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('all.kelulusan.aduan') }}" class="nav-link {{ ($prefix == 'kelulusan2') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p><small>Aduan</small></p>
               </a>
@@ -227,7 +227,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link">
+          <a href="{{ route('all.laporan.aduan') }}" class="nav-link">
             <i class="nav-icon fas fa-columns"></i>
             <p>
               Aduan

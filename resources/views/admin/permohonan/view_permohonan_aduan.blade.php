@@ -110,19 +110,19 @@
             <tbody>
               <tr>
                 <td style="width: 30%"><b>Url</b></td>
-                <td><a href="{{ $lamanweb->url }}">{{ ($lamanweb->url != null) ? $lamanweb->url : ' - Data Tidak Wujud - '  }}</a></td>
+                <td><a href="{{ $aduan->url }}">{{ ($aduan->url != null) ? $aduan->url : ' - Data Tidak Wujud - '  }}</a></td>
               </tr>
               <tr>
                 <td><b>Tindakan Oleh</b></td>
-                <td>{{ ($lamanweb->tindakan_by != null) ? $lamanweb->tindakan_by : ' - Data Tidak Wujud - ' }}</td>
+                <td>{{ ($aduan->tindakan_by != null) ? $aduan->tindakan_by : ' - Data Tidak Wujud - ' }}</td>
               </tr>
               <tr>
                 <td><b>Diluluskan Oleh</b></td>
-                <td>{{ ($lamanweb->lulus_by != null) ? $lamanweb->lulus_by : ' - Data Tidak Wujud - ' }}</td>
+                <td>{{ ($aduan->lulus_by != null) ? $aduan->lulus_by : ' - Data Tidak Wujud - ' }}</td>
               </tr>
               <tr>
                 <td><b>Tarikh Diluluskan</b></td>
-                <td>{{ ($lamanweb->tarikh_lulus != null) ? $lamanweb->tarikh_lulus : ' - Data Tidak Wujud - ' }}</td>
+                <td>{{ ($aduan->tarikh_lulus != null) ? $aduan->tarikh_lulus : ' - Data Tidak Wujud - ' }}</td>
               </tr>
             </tbody>
           </table>

@@ -17,4 +17,9 @@ class Jabatan extends Model
     {
         return $this->hasOne(LamanWeb::class,'Jabatan_id','id');
     }
+    public function aduan()
+    {
+        return $this->hasOne(Aduan::class,'Jabatan_id','id');
+    }
+
 }

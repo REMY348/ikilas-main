@@ -27,10 +27,7 @@
           </div>
         </div>
 
-              {{-- @php
-              $katsalid = explode(',',$mohon->kategori_saluran_id);
-              $kira = count($katsalid)
-              @endphp --}}
+             
 
           <div class="col-6">
             <div class="form-group">

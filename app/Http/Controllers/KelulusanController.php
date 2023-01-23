@@ -80,13 +80,13 @@ class KelulusanController extends Controller
         // dd($user);
             Notification::send($user,new LamanwebNotification($lamanweb->tajuk,$id_lamanweb));
         }
-        // if ($request->status == 'diluluskan') {
-        //     # code...
-        //     $user = User::where('jabatan_id',Auth::user()->jabatan_id)->where('id',$lamanweb->user->id)->get();
-        //     $id_lamanweb = $lamanweb->id;
-        // // dd($user);
-        //     Notification::send($user,new LamanwebNotification($lamanweb->tajuk,$id_lamanweb));
-        // }
+        if ($request->status == 'diluluskan') {
+            # code...
+            $user = User::where('jabatan_id',Auth::user()->jabatan_id)->where('id',$lamanweb->user->id)->get();
+            $id_lamanweb = $lamanweb->id;
+        // dd($user);
+            Notification::send($user,new LamanwebNotification($lamanweb->tajuk,$id_lamanweb));
+        }
             
         return redirect()->route('all.kelulusan.lamanweb')->with('success','Data Laman Web Anda Telah Berjaya Diluluskan');
     }

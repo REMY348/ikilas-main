@@ -9,6 +9,7 @@ use App\Http\Controllers\JenisPengemaskinianController;
 use App\Http\Controllers\KategoriMaklumatController;
 use App\Http\Controllers\KategoriSaluranController;
 use App\Http\Controllers\KelulusanController;
+use App\Http\Controllers\KelulusanAduanController;
 use App\Http\Controllers\LamanWebController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProfileController;
@@ -156,12 +157,25 @@ Route::prefix('kelulusan')->group(function () {
         Route::post('laman web/update/{id}', [KelulusanController::class,'updateKelulusanLamanWeb'])->name('update.kelulusan.lamanweb');
     // kelulusan laman web route end
 });
+Route::prefix('kelulusan2')->group(function () {
+    // kelulusan laman web route begin
+        Route::get('aduan/all', [KelulusanAduanController::class,'allKelulusanAduan'])->name('all.kelulusan.aduan');
+        Route::get('aduan/edit/{id}', [KelulusanAduanController::class,'editKelulusanAduan'])->name('edit.kelulusan.aduan');
+        Route::post('aduan/update/{id}', [KelulusanAduanController::class,'updateKelulusanAduan'])->name('update.kelulusan.aduan');
+    // kelulusan laman web route end
+});
 
 Route::prefix('laporan')->group(function () {
     // laporan laman web route begin
         Route::get('laman web/all', [LaporanController::class,'allLaporanLamanWeb'])->name('all.laporan.lamanweb');
         Route::get('laman web/edit/{id}', [LaporanController::class,'editLaporanLamanWeb'])->name('edit.laporan.lamanweb');
         Route::post('laman web/update/{id}', [LaporanController::class,'updateLaporanLamanWeb'])->name('update.laporan.lamanweb');
+    // laporan laman web route end
+});
+Route::prefix('laporan2')->group(function () {
+    // laporan laman web route begin
+        Route::get('aduan/all', [LaporanController::class,'allLaporanAduan'])->name('all.laporan.aduan');
+       
     // laporan laman web route end
 });
 

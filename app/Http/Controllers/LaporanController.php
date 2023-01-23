@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aduan;
 use App\Models\LamanWeb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,4 +45,56 @@ class LaporanController extends Controller
 
         return view('admin.laporan.laman_web',$data);
     }
+    public function allLaporanAduan(Request $request){
+
+        $data['date']= $request->input('tarikh_mohon');
+        $data['status']= $request->input('status');
+        $data['laporan'] = Aduan::all();
+
+
+
+        // if( $request->input($data['date'])){
+        //     $data['laporan'] = Aduan::where('date', 'LIKE', "%" . $request->tarikh_mohon . "%")->get();
+        // }
+        // if( $request->input($data['status'])){
+        //     $data['laporan'] = Aduan::where('status', 'LIKE', "%" . $request->status . "%")->get();
+        // }
+        // if( $request->input($data['status'] && $data['date'])){
+        //     $data['laporan'] = Aduan::where('status', 'LIKE', "%" . $request->status . "%")
+        //                         ->where('date', 'LIKE', "%" . $request->tarikh_mohon . "%")->get();
+        // }
+
+        // dd($data['laporan']);
+        if($data['date']){
+
+            if($data['status'] == NULL){
+                $data['laporan'] = Aduan::where('tarikh_mohon','like',"%".$request->tarikh_mohon."%")
+                ->where('status','like',"%".$request->status."%")
+                ->get();
+            }else{
+                $data['laporan'] = Aduan::where('tarikh_mohon','like',"%".$request->tarikh_mohon."%")
+                ->where('status','like',"%".$request->status."%")
+                ->get();
+            }
+        }
+        if($data['status']){
+
+            if($data['date'] == NULL){
+                $data['laporan'] = Aduan::where('tarikh_mohon','like',"%".$request->tarikh_mohon."%")
+                ->where('status','like',"%".$request->status."%")
+                ->get();
+            }else{
+                $data['laporan'] = Aduan::where('tarikh_mohon','like',"%".$request->tarikh_mohon."%")
+                ->where('status','like',"%".$request->status."%")
+                ->get();
+            }
+        }
+
+
+
+
+        return view('admin.laporan.aduan',$data);
+
+    
+}
 }
