@@ -1,4 +1,4 @@
-# Ikilas – Internal Complaint Management System
+# Internal Complaint Management System
 
 Ikilas is a **ticketing and complaint management system** developed during my internship at **Majlis Perbandaran Klang**.  
 The system was built using **Laravel** to help staff report IT-related issues while enabling the IT department to efficiently track, manage, and resolve complaints.
